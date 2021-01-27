@@ -1,6 +1,6 @@
-function seed(a, b, c) {
+function seed() {
 
-  return [a, b, c];
+  return Array.prototype.slice.call(arguments);
 }
 
 function same([x, y], [j, k]) {}
