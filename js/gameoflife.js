@@ -15,7 +15,13 @@ function contains(cell) {
   return this.some(a => cell.every((v, i) => v === a[i]))
 }
 
-const printCell = (cell, state) => {};
+const printCell = (cell, state) => {
+  if (state.some(a => cell.every((v, i) => v === a[i]))) {
+    return '\u25A3';
+  } else {
+    return '\u25A2';
+  }
+};
 
 const corners = (state = []) => {};
 
