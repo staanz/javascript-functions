@@ -32,11 +32,24 @@ const corners = (state = []) => {
     let topRight = [Math.max(...xs), Math.max(...ys)];
     let bottomLeft = [Math.min(...xs), Math.min(...ys)];
 
-    return {topRight: topRight, bottomLeft: bottomLeft}
+    return {topRight: topRight, bottomLeft: bottomLeft};
   }
 };
 
-const printCells = (state) => {};
+const printCells = (state) => {
+  let corners = corners(state);
+  let bl = corners.bottomLeft;
+  let tr = corners.topRight;
+  let finalString = '';
+
+  for (let i = bl[0]; i < tr[0]; i++) {
+    for (let j = bl[1]; j < tr[1]; tr++) {
+        finalString += printCell([i, j], state) + ' ';
+    }
+    finalString += '\n'
+  }
+  return finalString;
+};
 
 const getNeighborsOf = ([x, y]) => {};
 
