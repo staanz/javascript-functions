@@ -53,6 +53,22 @@ const printCells = (state) => {
 };
 
 const getNeighborsOf = ([x, y]) => {
+    let xsLow = x - 1;
+    let xsHigh = x + 1;
+    let ysLow = y - 1;
+    let ysHigh = y + 1;
+
+    return [
+        [xsLow, ysLow],
+        [xsLow, y],
+        [xsLow, ysHigh],
+        [xsHigh, ysLow],
+        [xsHigh, y],
+        [xsHigh, ysHigh],
+        [x, ysLow],
+        [x, ysHigh],
+
+    ]
 };
 
 const getLivingNeighbors = (cell, state) => {
