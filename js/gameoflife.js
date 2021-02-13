@@ -72,12 +72,31 @@ const getNeighborsOf = ([x, y]) => {
 };
 
 const getLivingNeighbors = (cell, state) => {
+    let neighbors = getNeighborsOf(cell);
+    let livingNeighbors = [];
+    const checkCell = contains.bind(state);
+
+    neighbors.forEach(checkIfNeighbor);
+    function checkIfNeighbor (neighbor) {
+        if (checkCell(neighbor)) {
+            livingNeighbors.push(neighbor);
+        }
+    }
+
+    return livingNeighbors;
 };
 
 const willBeAlive = (cell, state) => {
+    let livingNeighborsCount = getLivingNeighbors(cell, state).length;
+    const checkCell = contains.bind(state);
+
+    let isAlive = checkCell(cell, state);
+
+    return livingNeighborsCount === 3 || (isAlive && livingNeighborsCount === 2);
 };
 
 const calculateNext = (state) => {
+    
 };
 
 const iterate = (state, iterations) => {
