@@ -77,7 +77,8 @@ const getLivingNeighbors = (cell, state) => {
     const checkCell = contains.bind(state);
 
     neighbors.forEach(checkIfNeighbor);
-    function checkIfNeighbor (neighbor) {
+
+    function checkIfNeighbor(neighbor) {
         if (checkCell(neighbor)) {
             livingNeighbors.push(neighbor);
         }
@@ -96,10 +97,25 @@ const willBeAlive = (cell, state) => {
 };
 
 const calculateNext = (state) => {
-    
+    const {topRight, bottomLeft} = corners(state);
+    let result = [];
+    for (let i = topRight[1] + 1; i >= bottomLeft[1] - 1; i--) {
+        for (let j = bottomLeft[0] - 1; j <= topRight[0] + 1; j++) {
+            result = result.concat(willBeAlive([i, j], state) ? [[i, j]] : [])
+        }
+    }
+    return result;
+
 };
 
 const iterate = (state, iterations) => {
+    let results = [state];
+    let result = state;
+    for (let i = 0; i < iterations; i++) {
+        result = calculateNext(result);
+        results = results.concat([result]);
+    }
+    return results
 };
 
 const main = (pattern, iterations) => {
